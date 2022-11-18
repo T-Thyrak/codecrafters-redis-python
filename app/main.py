@@ -12,8 +12,7 @@ def main():
     connection, return_address = server_socket.accept() # wait for client
     
     with connection:
-        connection.send("+PONG\r\n")
-
+        connection.send(b"+PONG\r\n")
 
 if __name__ == "__main__":
     main()
