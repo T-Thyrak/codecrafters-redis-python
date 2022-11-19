@@ -9,7 +9,7 @@ def main():
         
         data = connection.recv(1024)
         
-        connection.send("+PONG\r")
+        connection.send(b"+PONG\r")
         
     connection.close()
 
