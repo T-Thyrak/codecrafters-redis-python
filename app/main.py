@@ -7,9 +7,11 @@ def main():
     while True:
         connection, return_address = server_socket.accept() # wait for client
         
-        with connection:
-            data = connection.recv(1024)
-            connection.send(b"+PONG\r\n")
+        data = connection.recv(1024)
+        
+        connection.send("+PONG\r")
+        
+    connection.close()
 
 if __name__ == "__main__":
     main()
