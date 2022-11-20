@@ -1,14 +1,15 @@
 import socket
 import asyncio
+import threading
 
 
-def handle_client(client_socket, address):
+async def handle_client(loop: asyncio.AbstractEventLoop, client_socket, address):
     while True:
-        data = client_socket.recv(1024)
-        client_socket.send(b"+PONG\r\n")
+        data = await loop.sock_recv(client_socket)
+        
+        loop.sock_sendall(client_socket, b"+PONG\r\n")
     
-    client_socket.close()
-
+    connection.close()
 
 def main():
     server_socket = socket.create_server(("localhost", 6379), reuse_port=True)
@@ -16,7 +17,7 @@ def main():
     
     while True:
         client_socket, address = server_socket.accept()
-        loop.create_task(handle_client(client_socket, address))
+        loop.create_task(handle_client(loop, client_socket, address))
     
 if __name__ == "__main__":
     main()
