@@ -5,7 +5,7 @@ import asyncio
 def handle_client(client_socket, address):
     while True:
         data = client_socket.recv(1024)
-        client_socket.send(b"+PONG\r")
+        client_socket.send(b"+PONG\r\n")
     
     client_socket.close()
 
