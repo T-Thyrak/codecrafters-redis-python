@@ -11,7 +11,7 @@ def main():
         client_socket, address = server_socket.accept()
         pool.apply_async(handle_client, args=(client_socket, address))
     
-async def handle_client(socket, addr):
+def handle_client(socket, addr):
     while True:
         data = socket.recv(1024)
         socket.send(b"+PONG\r\n")
