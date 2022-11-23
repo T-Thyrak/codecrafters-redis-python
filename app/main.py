@@ -9,6 +9,7 @@ def main():
     # pool = multiprocessing.Pool()
     
     while True:
+        print(f"now accepting")
         client_socket, address = server_socket.accept()
         print(f"Received connection from {address}")
         # pool.apply_async(handle_client, args=(client_socket, address))
