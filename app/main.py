@@ -30,10 +30,11 @@ def handle_client(socket: socket.socket, addr):
                 
                 send_data = f"${str_len}\r\n{str_echo}\r\n"
                 print(f"Sent with echo: {send_data}")
-                socket.send()
+                socket.send(send_data)
             else:
                 print("Sent without echo")
                 socket.send("+PONG\r\n")
+                print("After send")
             continue
         
         echo_pattern = r"(?i)\*2\r\n\$4\r\nECHO\r\n$(\d+)\r\n(.*)\r\n"
