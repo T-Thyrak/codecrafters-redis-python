@@ -9,9 +9,7 @@ def main():
     # pool = multiprocessing.Pool()
     
     while True:
-        print(f"now accepting")
         client_socket, address = server_socket.accept()
-        print(f"Received connection from {address}")
         # pool.apply_async(handle_client, args=(client_socket, address))
         
         proc = multiprocessing.Process(target=handle_client, args=(client_socket, address))
@@ -27,23 +25,19 @@ def handle_client(socket: socket.socket, addr):
         
         ping_pattern = r"(?i)\*(\d+)\r\n\$4\r\nping\r\n(\$(\d+)\r\n(.*)\r\n)?"
         match_ping = re.match(ping_pattern, str_data)
-        print(match_ping)
         if match_ping:
             if match_ping.group(2):
                 str_len = int(match_ping.group(3))
                 str_echo = match_ping.group(4)
                 
                 send_data = f"${str_len}\r\n{str_echo}\r\n"
-                print(f"Sent with echo: {send_data}")
                 socket.send(bytes(send_data, "utf-8"))
             else:
-                print("Sent without echo")
                 socket.send(b"+PONG\r\n")
-                print("After send")
             continue
         
         echo_pattern = r"(?i)\*2\r\n\$4\r\nECHO\r\n$(\d+)\r\n(.*)\r\n"
-        print(data)
+        print(f"{data = }")
         match_echo = re.match(echo_pattern, str_data)
         print(match_echo)
         
