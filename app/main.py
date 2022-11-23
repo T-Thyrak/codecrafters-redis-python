@@ -22,6 +22,7 @@ def handle_client(socket: socket.socket, addr):
         
         ping_pattern = r"(?i)\*(\d+)\r\n\$4\r\nping\r\n(\$(\d+)\r\n(.*)\r\n)?"
         match_ping = re.match(ping_pattern, str_data)
+        print(match_ping)
         if match_ping:
             if match_ping.group(2):
                 str_len = int(match_ping.group(3))
@@ -30,9 +31,11 @@ def handle_client(socket: socket.socket, addr):
                 socket.send(bytes(f"${str_len}\r\n{str_echo}\r\n", "utf-8"))
             else:
                 socket.send(bytes("+PONG\r\n"))
+            continue
         
         echo_pattern = r"(?i)\*2\r\n\$4\r\nECHO\r\n$(\d+)\r\n(.*)\r\n"
         match_echo = re.match(echo_pattern, str_data)
+        print(match_echo)
         
         if match_echo:
             str_len = int(match_echo.group(1))
