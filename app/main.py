@@ -15,7 +15,7 @@ def main():
         # pool.apply_async(handle_client, args=(client_socket, address))
         
         proc = multiprocessing.Process(target=handle_client, args=(client_socket, address))
-        proc.run()
+        proc.start()
     
 def handle_client(socket: socket.socket, addr):
     while True:
