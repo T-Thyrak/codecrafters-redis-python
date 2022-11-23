@@ -29,8 +29,10 @@ def handle_client(socket: socket.socket, addr):
                 str_echo = match_ping.group(4)
                 
                 socket.send(bytes(f"${str_len}\r\n{str_echo}\r\n", "utf-8"))
+                print(f"Sent with echo: {str_echo}")
             else:
                 socket.send(bytes("+PONG\r\n"))
+                print("Sent without echo")
             continue
         
         echo_pattern = r"(?i)\*2\r\n\$4\r\nECHO\r\n$(\d+)\r\n(.*)\r\n"
