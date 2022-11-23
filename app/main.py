@@ -36,7 +36,7 @@ def handle_client(socket: socket.socket, addr):
                 socket.send(b"+PONG\r\n")
             continue
         
-        echo_pattern = r"(?i)\*2\r\n\$4\r\nECHO\r\n$(\d+)\r\n(.*)\r\n"
+        echo_pattern = r"(?i)\*2\r\n\$4\r\nECHO\r\n\$(\d+)\r\n(.*)\r\n"
         print(f"{data = }")
         match_echo = re.match(echo_pattern, str_data)
         print(match_echo)
