@@ -18,8 +18,8 @@ def main():
 def handle_client(socket: socket.socket, addr):
     while True:
         data = socket.recv(1024)
-        # if not data:
-        #     break
+        if not data:
+            break
         
         str_data = data.decode("utf-8")
         
