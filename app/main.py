@@ -10,7 +10,7 @@ def main():
     
     while True:
         client_socket, address = server_socket.accept()
-        pool.apply_async(handle_client, args=(client_socket, address))
+        pool.apply_async(handle_client, args=(client_socket, address)).get()
     
 def handle_client(socket: socket.socket, addr):
     while True:
