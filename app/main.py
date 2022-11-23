@@ -12,7 +12,7 @@ def main():
         client_socket, address = server_socket.accept()
         pool.apply_async(handle_client, args=(client_socket, address))
     
-def handle_client(socket: socket.socket, addr: socket._RetAddress):
+def handle_client(socket: socket.socket, addr):
     while True:
         data = socket.recv(1024)
         # if not data:
