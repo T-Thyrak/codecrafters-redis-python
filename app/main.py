@@ -6,11 +6,14 @@ import re
 def main():
     server_socket = socket.create_server(("localhost", 6379), reuse_port=True)
     
-    pool = multiprocessing.Pool()
+    # pool = multiprocessing.Pool()
     
     while True:
         client_socket, address = server_socket.accept()
-        pool.apply_async(handle_client, args=(client_socket, address), callback=lambda _: _)
+        # pool.apply_async(handle_client, args=(client_socket, address))
+        
+        proc = multiprocessing.Process(target=handle_client, args=(client_socket, address))
+        proc.run()
     
 def handle_client(socket: socket.socket, addr):
     while True:
