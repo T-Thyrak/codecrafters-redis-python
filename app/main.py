@@ -51,7 +51,7 @@ def handle_client(socket: socket.socket, addr):
             continue
         
         print(data)
-        set_pattern = r"(?i)^\*\r\n\$3\r\nSET\r\n\$(\d+)\r\n(.*)\r\n\$(\d+)\r\n(.*)\r\n$"
+        set_pattern = r"(?i)^\*\$3\r\nSET\r\n\$(\d+)\r\n(.*)\r\n\$(\d+)\r\n(.*)\r\n$"
         match_set = re.match(set_pattern, str_data)
         print(match_set)
         
@@ -67,7 +67,7 @@ def handle_client(socket: socket.socket, addr):
             socket.send(bytes("+OK\r\n", "utf-8"))
             continue
         
-        get_pattern = r"(?i)^\*\r\n\$3\r\nGET\r\n\$(\d+)\r\n(.*)\r\n$"
+        get_pattern = r"(?i)^\*\$3\r\nGET\r\n\$(\d+)\r\n(.*)\r\n$"
         match_get = re.match(get_pattern, str_data)
         
         if match_get:
