@@ -52,6 +52,7 @@ def handle_client(socket: socket.socket, addr):
         
         set_pattern = r"(?i)^\*\r\n\$3\r\nSET\r\n\$(\d+)\r\n(.*)\r\n\$(\d+)\r\n(.*)\r\n$"
         match_set = re.match(set_pattern, str_data)
+        print(match_set)
         
         if match_set:
             key_len = int(match_set.group(1))
