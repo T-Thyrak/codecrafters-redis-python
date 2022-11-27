@@ -50,6 +50,7 @@ def handle_client(socket: socket.socket, addr):
             socket.send(bytes(f"${str_len}\r\n{str_echo}\r\n", "utf-8"))
             continue
         
+        print(data)
         set_pattern = r"(?i)^\*\r\n\$3\r\nSET\r\n\$(\d+)\r\n(.*)\r\n\$(\d+)\r\n(.*)\r\n$"
         match_set = re.match(set_pattern, str_data)
         print(match_set)
