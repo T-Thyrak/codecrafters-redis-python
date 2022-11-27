@@ -56,11 +56,11 @@ def handle_client(socket: socket.socket, addr):
         print(match_set)
         
         if match_set:
-            key_len = int(match_set.group(1))
-            key = match_set.group(2)
+            key_len = int(match_set.group(2))
+            key = match_set.group(3)
             
-            value_len = int(match_set.group(3))
-            value = match_set.group(4)
+            value_len = int(match_set.group(4))
+            value = match_set.group(5)
             
             database.set(key, value)
             
@@ -71,8 +71,8 @@ def handle_client(socket: socket.socket, addr):
         match_get = re.match(get_pattern, str_data)
         
         if match_get:
-            key_len = int(match_get.group(1))
-            key = match_get.group(2)
+            key_len = int(match_get.group(2))
+            key = match_get.group(3)
             
             value = database.get(key)
             
