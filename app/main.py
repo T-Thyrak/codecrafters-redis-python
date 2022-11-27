@@ -3,7 +3,7 @@ import threading
 import multiprocessing
 import re
 
-from expdict import ExpDict
+from app.expdict import ExpDict
 
 database = ExpDict()
 
