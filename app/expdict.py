@@ -4,7 +4,7 @@ class ExpDict:
     def __init__(self):
         self._dict = {}
         
-    def set(self, key, value, px:int | None=None):
+    def set(self, key, value, px=None):
         self._dict[key] = (value, px + round(time.time(), 3))
         
     def get(self, key):
