@@ -6,6 +6,7 @@ class ExpDict:
         
     def set(self, key, value, px=None):
         self._dict[key] = (value, px + round(time.time(), 3) if px is not None else None)
+        print(self._dict[key])
         
     def get(self, key):
         thing = self._dict.get(key)
@@ -16,6 +17,7 @@ class ExpDict:
             return thing[0]
         
         if thing[1] > round(time.time(), 3):
+            print(thing[1] - round(time.time(), 3))
             return thing[0]
         
         del self._dict[key]
