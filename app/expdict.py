@@ -5,7 +5,7 @@ class ExpDict:
         self._dict = {}
         
     def set(self, key, value, px=None):
-        self._dict[key] = (value, px + round(time.time(), 3))
+        self._dict[key] = (value, px + round(time.time(), 3) if px is not None else None)
         
     def get(self, key):
         thing = self._dict.get(key)
