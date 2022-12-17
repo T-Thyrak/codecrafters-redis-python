@@ -50,10 +50,8 @@ def handle_client(socket: socket.socket, addr):
             socket.send(bytes(f"${str_len}\r\n{str_echo}\r\n", "utf-8"))
             continue
         
-        print(data)
-        set_pattern = r"(?i)^\*(\d+)\r\n\$3\r\nSET\r\n\$(\d+)\r\n(.*)\r\n\$(\d+)\r\n(.*)\r\n$"
+        set_pattern = r"(?i)^\*(\d+)\r\n\$3\r\nSET\r\n\$(\d+)\r\n(.*)\r\n\$(\d+)\r\n(.*)\r\n(\$2\r\nPX\r\n\$(\d+)\r\n(\d+)\r\n)?$"
         match_set = re.match(set_pattern, str_data)
-        print(match_set)
         
         if match_set:
             key_len = int(match_set.group(2))
@@ -62,7 +60,16 @@ def handle_client(socket: socket.socket, addr):
             value_len = int(match_set.group(4))
             value = match_set.group(5)
             
-            database.set(key, value)
+            if match_set.group(6):
+                _len = int(match_set.group(7))
+                expiry_str = match_set.group(8)
+                
+                exptime_ms = int(expiry_str)
+                
+            else:
+                exptime_ms = None
+            
+            database.set(key, value, px=exptime_ms)
             
             socket.send(bytes("+OK\r\n", "utf-8"))
             continue
